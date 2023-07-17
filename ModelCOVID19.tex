@@ -1,0 +1,136 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[catalan]{babel}
+\usepackage{amsmath,amsthm,amssymb,graphicx,enumerate,array,float,titlesec,stmaryrd}
+\newcommand\enllas{\raise.5pt\hbox{$\boxempty\kern-4.85pt{}^{\tiny\nearrow}$}\kern-2pt}
+\titleformat*{\section}{\large\bfseries}
+\usepackage[colorlinks,linkcolor=blue,citecolor=black,urlcolor=blue]{hyperref}
+\let\olditemize\itemize
+\def\itemize{\olditemize\itemsep=0.2pt}
+\author{Montserrat Contel \\ Taller de Modelització Matemàtica \\ Grau en Matemàtiques\\Universitat Autònoma de Barcelona}
+\title{\textbf{Quantificació de l'efecte d'algunes mesures de lluita contra la Covid-19}}
+\date{25 de febrer de 2021}
+
+\begin{document}
+	\maketitle
+	\section*{Enunciat}
+	Pel primer enunciat es demana explicar d'on prové el valor de $70\%$, que és el percentatge de població que es considera que cal vacunar per poder aturar la Covid-19. En la mateixa línia, es pregunta com depèn el factor de reproducció de la malaltia del percentatge de població immune.
+
+	El segon enunciat proposa considerar que només usa mascareta un cert percentatge de la població i que una mascareta impedeix el pas del virus amb una certa probabilitat, per raonar com influeixen aquests paràmetres en el factor de reproducció de la malaltia. També es demana fer una estimació de com hauria evolucionat l'epidèmia si no s'hagués usat mascareta.
+	
+	\section{Introducció a conceptes}
+	En estudis epidemiològics, un paràmetre important a considerar per estudiar l'evolució d'una infecció és l'anomenat factor de reproducció ($R$) que indica quants casos secundaris deriven d'un cas primari, de forma més simple, quantes persones contagia cada persona infectada de mitjana.
+	
+	És clau conèixer la interpretació de $R$ que s'utilitza en epidemiologia: en el cas que $R>1$ es considera que la infecció pot produir una epidèmia, si $R=1$ la infecció es mantindrà en la població, i si $R<1$ es produirà una regressió i la infecció tindrà tendència a desaparèixer. Parlem de nivell epidèmic, nivell endèmic i nivell d'eliminació respectivament.\cite{vacuna}
+	
+	El factor $R$ es pot definir a través d'una expressió que depèn d'altres:\cite{profe }
+	\[R:=\frac{c\cdot w\cdot S/N}{\gamma}\]
+	El terme $c$ és el nombre de persones amb les quals té contacte un individu per unitat de temps, $w$ descriu la probabilitat de transmissió de la infecció, el valor $S$ és el nombre de persones susceptibles a la infecció en la població, i $N$ és el nombre total d'individus, per tant, $S/N$ és la proporció de població susceptible. Al denominador tenim $\gamma$, que és la taxa de resolució, indica quantes unitats de temps triga un individu infectat a curar-se de mitjana.\\
+	El valor de $R$ pot canviar en el temps, a causa de variacions en el valor $c,w,S/N,\gamma$. Per exemple, imposar un confinament reduiria el nombre de contactes i modificaria $c$.
+	
+	Distingim entre el factor de reproducció $R$ i el factor de reproducció bàsic ($R_0$): el primer terme l'hem definit anteriorment i el seu valor pot variar amb el temps, el segon terme s'estima al primer contacte entre la infecció i la població i indica el nombre de persones que contagia cada persona infectada en el supòsit que no hi hagi cap mena de restricció, és a dir, amb les condicions de vida que hi havia durant aquest primer contacte.
+	
+	\section{Simplificacions adoptades}
+	\begin{itemize}
+		\item Suposem una distribució uniforme de la població, és a dir, considerem que una persona de la població es pot relacionar amb qualsevol altra persona de la mateixa població. Per tant, no tenim en compte l'efecte de la distribució geogràfica i els possibles impediments de comunicació que pot haver-hi entre diferents regions.
+		\item No hi ha població immune a la Covid-19 abans del primer contacte.
+		\item Aquella fracció de població que ha passat la infecció esdevé immune, no pot tornar a contreure-la. 
+		\item La població vacunada no pot contraure la infecció. 
+		\item Actualment es parla de possibles noves variants del virus, suposem que no presenten mutacions que les puguin fer resistents a la resposta immunitària. Per tant, la població immune (a causa de la vacuna o per haver patit la malaltia) ho serà davant qualsevol variant.\cite{variants}
+		\item El nombre de contactes diaris $c$ i la probabilitat de contagi $w$ és igual per tothom i resultat de considerar mitjanes de tota la població.
+		\item Prenem com a constant qualsevol  mesura que no sigui la de l'objecte d'estudi.
+		\item La població que utilitza mascaretes, fa ús de uirúrgiques.
+		\item La unitat de temps són dies.
+	\end{itemize}
+	\section{Discussió sobre el primer enunciat}
+	Abans d'explicar la procedència del valor del percentatge de població que cal ser vacunada per poder aturar la Covid-19 explicarem per què cal arribar a un determinat percentatge de població immune. La importància d'aquest fet roman en el fenomen que es coneix com a immunitat de grup, que s'observa en una població quan una certa fracció ha esdevingut immune a una infecció, de forma que aconsegueix interrompre la cadena de contagis i provoca una protecció sobre la població susceptible.
+	Es considera que s'ha assolit la immunitat de grup quan una persona infectada genera menys d'un cas secundari de mitjana, aquest enunciat és equivalent a dir que s'ha assolit la immunitat de grup quan $R<1$. 
+	\cite{viki}\cite{herdimm}\\
+	
+	El percentatge de població que cal vacunar s'aproxima a partir de $R_0$, per així assegurar la tornada a les condicions de vida del primer contacte. En el cas de la Covid-19 es va estimar $R_0=3,28$.\cite{Liu}
+	
+	Partint de
+	\[R=\frac{c\cdot w\cdot S/N}{\gamma}\] 
+	
+	Podem trobar una expressió per $R_0$: per definició és un valor calculat al primer contacte, i per tant es considera que tota la població és susceptible. Per tant, en la situació descrita a $R_0$ tenim $S/N=N/N=1$.\[R_0=\frac{c\cdot w}{\gamma}=3,28\]
+	Els dos factors de reproducció es relacionen de la següent manera:
+	\[R=\frac{c\cdot w}{\gamma}\cdot S/N=R_0\cdot S/N\]
+	
+	D'acord amb els estudis epidemiològics, la Covid-19 es trobaria en nivell d'eliminació si el valor de $R$ fos inferior a 1 (s'hauria assolit la immunitat de grup). Per tant, trobar el percentatge de població que caldria vacunar per aturar-la és equivalent a estimar la fracció $S/N$ que permet complir $R<1$:
+	\[R=R_0\cdot S/N < 1\]
+	\[S/N <\frac{1}{R_0}=\frac{1}{3,28} \approx 0,305\]
+	
+	Els susceptibles representen la fracció de població que pot contagiar-se de la infecció, per tant $S+J=N$ on $J$ són els immunes en la situació considerada (donat que suposem el primer contacte, la població immune serà població vacunada, ja que no hi ha immunes per haver patit la malaltia encara). Amb aquesta distribució de la població podem trobar el percentatge de vacunats necessaris. Dividim $S+J=N$ per $N$ i aïllem la proporció d'immunes:
+	\(\frac{J}{N}=1-\frac{S}{N}\). Prenent el valor límit de $S/N$, podem trobar el mínim $J/N$.
+	\[\frac{J}{N}>1-\frac{1}{3,28} \approx 0,695\]
+	
+	La proporció de vacunats respecte del total de la població ha de ser superior al valor aproximar $0,695$, o equivalentment, al percentatge $69,5\%$. Per tant, es pot aproximar que el percentatge mínim de població vacunada que cal perquè $R<1$ és $70\%$, amb la qual cosa s'aconseguiria una tendència de la infecció a desaparèixer.\\
+	
+	Per estudiar la dependència  de $R$ respecte del percentatge d'immunes observem que a l'expressió \(R=\frac{c\cdot w\cdot S/N}{\gamma}\) tenim la proporció de població susceptible, $S/N$, situada al numerador. Per tant, el nombre de reproducció és directament proporcional al número de susceptibles: una disminució del número de susceptibles implicaria també una disminució del valor de $R$.
+	 
+	Considerant $\frac{S}{N}=1-\frac{J}{N}$, podem reescriure l'expressió de $R$ en funció de la proporció d'immunes (per situacions diferents del primer contacte, considerem a $J$ individus ja immunes i també infectats, perquè esdevenen immunes després d'un període de temps donat):
+	\[R=\frac{c\cdot w}{\gamma}\cdot \frac{S}{N}=\frac{c\cdot w}{\gamma}\cdot (1-\frac{J}{N})\]
+	
+	Un augment del número de població immune equival a un augment de la proporció $J/N$. Per tant, el valor de $(1-J/N)$ disminueix i en conseqüència, també ho fa $R$. En definitiva, un augment del percentatge de població immune provoca una disminució del factor de reproducció, $R$ depèn d'aquest percentatge de forma inversament proporcional.
+	
+	\section{Discussió sobre el segon enunciat}
+	L'eficàcia d'una mascareta i el percentatge de població que la porta afecta el valor de $w$ (probabilitat de transmissió): les mascaretes protegeixen a la població impedint el pas del virus amb una certa probabilitat, reduir el seu ús condueix a què la població estigui més exposada al contagi.
+	
+	Considerem $w=w_0\cdot\mu$, on $w_0$ recull l'efecte de qualsevol mesura imposada per evitar els contagis tret de mascaretes, així $w_0$ és la probabilitat de transmissió en el cas que no s'utilitzin mascaretes. L'efecte de la protecció de les mascaretes queda expressat a $\mu$, què és la probabilitat de transmetre la infecció segons la proporció de població que utilitza mascareta i com són d'eficaces a l'hora de fer de barrera.
+	\\
+	
+	Considerem un cert percentatge de població que utilitza mascareta i que aquestes eviten el pas del virus en un altre percentatge donat. Denotem $p$ al tant per u de població que utilitza mascareta, així $(1-p)$ representa la població que no n'utilitza. Per tant, el cas que dues persones amb mascareta entrin en contacte es dóna amb una probabilitat $p\cdot p$, que l'emissor de gotícules porti mascareta i el receptor no es dóna amb probabilitat $p\cdot (1-p)$, i el cas on l'emissor no en porta, però el receptor si té probabilitat $(1-p)\cdot p$ de donar-se.
+	
+	Pel que fa a la protecció que ofereixen les mascaretes, distingim casos segons qui la porta: si l'emissor en porta, però el receptor no; l'eficàcia de la mascareta és de $e_1\%$, en el cas que l'emissor no en porti, però el receptor si; considerem $e_2\%$. Finalment, si tots dos en porten, s'aconsegueix una eficàcia de $e_3\%$. Per l'estudi considerarem l'eficàcia mitjana en tant per u $e=\frac{e_1+e_2+e_3}{3}\cdot\frac{1}{100}$.
+	
+	A partir de les probabilitats de contacte entre persones amb mascareta i l'eficàcia d'aquestes, obtenim la probabilitat d'evitar la transmissió en un contacte: \(e\cdot((1-p)p+(1-p)p+p^2)=e(2p-p^2)\). Resten per considerar contactes amb mascareta en què si hi ha contagi i els casos on els dos individus no porten mascareta, en definitiva, els casos on el contacte origina una transmissió.\\
+	
+	El factor $\mu$ que hem definit fa referència a la probabilitat amb la qual es produeix un contagi, per tant, considera els casos on si hi ha transmissió. És clar que $e(2p-p^2)+\mu=1$, ja que en un contacte o es transmet la infecció (amb probabilitat $\mu$) o no (amb probabilitat $e(2p-p^2)$). Trobem $\mu=1-e(2p-p^2)$.\\ 
+	\newline 
+	Amb $w=w_0\cdot (1-2ep+ep^2)$, el factor de reproducció queda reescrit:
+	\[R=\frac{c\cdot w_0\cdot S/N}{\gamma}\cdot (1-2ep+ep^2)\]
+	
+	Obtenim $R$ amb una dependència proporcional de la funció $1-2ep+ep^2$. Pels valors de $p,e$ que es consideren a l'estudi, $p\in[0,1]$ i $e\in[0,1]$, aquesta funció és estrictament decreixent. En el cas que fixem una de les dues variables, amb la variable lliure a l'interval $[0,1]$, la funció és també decreixent independentment de la variable fixada.
+	
+	De la monotonia la funció i la dependència de $R$ respecte d'aquesta, podem concloure que el factor de reproducció de la Covid-19 decreix a mesura que el percentatge de població que fa ús de mascareta i l'eficàcia d'aquestes augmenta.\\
+
+	A través de $w=w_o\cdot \mu$ ($w_o$ definit com la probabilitat de transmissió sense mascareta i $\mu$ aproximat per $1-2ep+ep^2$) podem definir $\frac{c\cdot w_o\cdot S/N}{\gamma}$ com el valor de $R$ en el cas que no s'utilitzin mascaretes, l'anomenarem $R_{nm}$. Reescrivim $R$ a partir de $R_{nm}$:
+	\[R= R_{nm}\cdot(1-2ep+ep^2)\] Trobem la raó entre $R_{nm}$ i $R$: \[\frac{R_{nm}}{R}=\frac{1}{1-2ep+ep^2}\]
+	
+	En el cas d'Espanya s'estima que, de mitjana, el $80\%$ de la població utilitza mascareta i l'eficàcia és del $65\%$ si la porta només l'emissor, $50\%$ si només en fa ús el receptor i $70\%$ si l'utilitzen tots dos.\cite{proteccio}\cite{perc} Així, per $p=0,8$ i $e=\frac{0,7+0,65+0,5}{3}=\frac{37}{60}$:
+	\[\frac{R_{nm}}{R}=\frac{125}{51}\approx 2,45\]
+	
+	En el cas que no s'hagués utilitzat mascareta, el factor de reproducció seria aproximadament $2,45$ vegades superior als valors de $R$ que s'han registrat. El nombre de contagis per cada cas primari seria major als assolits, per tant, es preveu que la infecció s'hauria propagat amb més facilitat i el número d'infectats hauria estat superior per períodes de temps més curts.
+	\section{Possibles refinaments}
+	Un model més refinat podria considerar el cas que es pugui tornar a patir la infecció un cop superada, o que la vacuna no sigui efectiva totalment. En aquest cas es podria considerar que un determinat percentatge de població que consideràvem com immune esdevé susceptible de nou. En un model amb aquesta objecció, seria fàcil introduir l'efecte de noves variants del virus. 
+	
+	En el nostre cas hem utilitzat mascaretes quirúrgiques, però n'hi ha diverses i amb eficàcia variant. És clar que un model més refinat podria tenir en compte les diferents mascaretes i el percentatge de població que les està utilitzant, per fer un estudi més exhaustiu de la variació de $R$ segons el tipus de mascareta implicat.
+	Un altre aspecte a tenir en compte és prendre els diferents valors d'eficiència que té la mascareta segons l'individu que la porti, ja que el nostre model considera una eficiència mitjana.
+	
+	També es podria considerar l'efecte de la distància entre dos individus en el moment que es produeix un contacte, no només l'efecte de la mascareta com a mesura de protecció. 
+	\section{Conclusions}
+	Segons els resultats de la nostra anàlisi, és correcte tractar de vacunar al $70\%$ de la població per tal de fer entrar la Covid-19 en recessió. Val a dir que si repetim el càlcul amb valors de $R$ actuals, que oscil·len entorn el $0,95$, obtindríem un percentatge de població a vacunar considerablement menor, però seria insuficient en el moment que s'eliminessin les restriccions vigents en aquest moment.\cite{catsalut} El $70\%$ de vacunats és suficient per poder tornar a fer vida normal i suprimir restriccions, però és evident que caldria intentar superar-lo.
+	
+	Pel que fa a l'efecte de les mascaretes i el seu ús generalitzat, és aconsellable promoure la seva utilització en la mesura del possible per evitar contagis. Malgrat que a Espanya la majoria de població n'utilitza, el tipus de mascareta varia entre la població, sovint utilitzant-ne algunes que han perdut eficàcia com a resultat de portar-les un període de temps massa llarg. Caldria fer una conscienciació sobre l'ús correcte de la mascareta per garantir el seu efecte com a barrera davant el virus.
+	\begin{thebibliography}{10}
+		\bibitem{vacuna} J. Vaqué Rafart, 2001. Inmunidad colectiva o de grupo. \textit{Vacunas}.
+		\href{https://www.elsevier.es/index.php?p=revista&pRevista=pdf-simple&pii=S1576988701702294&r=28}{\enllas}
+		\bibitem{profe }Xavier Mora, 2020. El nombre de reproducció de la COVID-19 i el model SIR. L'efecte dels retards de comptabilització. \textit{Materials Matemàtics.} 
+		\href{https://mat.uab.cat/web/matmat/wp-content/uploads/sites/23/2020/06/v2020n02.pdf}{\enllas}
+		\bibitem{variants} \textsl{ABC,} 2021. Vacunación en España: Datos y porcentajes de población vacunada de coronavirus por comunidades. \textit{ABC Sociedad} Actualitzat el 24 de febrer de 2021.
+		\href{https://www.abc.es/sociedad/abci-vacunacion-espana-vacunas-coronavirus-datos-nsv-202102171044_noticia.html}{\enllas}
+		\bibitem{viki} \textsl{Wikipedia.} Inmunidad de grupo.
+		\href{https://es.wikipedia.org/wiki/Inmunidad_de_grupo}{\enllas}
+		\bibitem{herdimm} Arnaud Fontanet, Simon Cauchemez, 2020. COVID-19 herd immunity: where are we? \textit{Nature Reviews Immunology}, 9 de setembre de 2020.
+		\href{https://www.nature.com/articles/s41577-020-00451-5.pdf#page2}{\enllas}
+		\bibitem{Liu} Yung Liu, Albert A. Gayle, Annelies Wilder-Smith, Joacim Rocklöv, 2020. The reproductive number of COVID-19 is higher compared to SARS coronavirus. \textit{Journal of Travel Medicine,} 13 de febrer de 2020.
+		\href{https://academic.oup.com/jtm/article/27/2/taaa021/5735319}{\enllas}
+		\bibitem{proteccio} Hiroshi Ueki, Yuri Furusawa, Kiyoko Iwatsuki-Hirimoto, Masaka Imai, Hiroki Kabata, Hidekazu Nishimura, Yoshihiro Kawaoka, 2020. Effectiveness of Face Masks in Preventing Airbone Tranmission of SARS-Cov-2. \textit{mSphere,} 21 octubre de 2020.
+		\href{https://msphere.asm.org/content/msph/5/5/e00637-20.full.pdf?fbclid=IwAR3am9VXHcehGEADz00IrTSAd0yLJ_b0hmD54zXfaFsBz52JZhY1xnjUDm8}{\enllas}
+		\bibitem{perc} \textsl{El orden mundial}, 2020. ¿Cuánta población usa mascarilla? \textit{El orden mundial,} 13 d'agost de 2020.
+		\href{https://elordenmundial.com/mapas/uso-mascarilla-mundo/}{\enllas}
+		
+		\bibitem{catsalut} \textsl{Agència de Qualitat i Avaluació Sanitàries de Catalunya,} 2021. Evolució dels casos i de la Rt del SARS-CoV2. 24 de febrer de 2021. \href{https://aquas.gencat.cat/ca/actualitat/ultimes-dades-coronavirus}{\enllas}
+	\end{thebibliography}
+\end{document}
